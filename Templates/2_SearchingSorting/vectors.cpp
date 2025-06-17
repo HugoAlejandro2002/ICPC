@@ -2,8 +2,10 @@
 using namespace std;
 
 int main() {
-    // Sorting
     vector<int> v = {1, 3, 5, 7, 9, 11};
+    // Reverse
+    reverse(v.begin(),v.end());
+    // Sorting
     sort(v.begin(), v.end());
 
     int n = 6;

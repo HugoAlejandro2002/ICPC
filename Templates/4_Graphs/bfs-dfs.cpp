@@ -1,8 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 1e5 + 5;
-vector<int> adj[MAXN];
+typedef vector<int> vi;
+
+const int MAXN = 1e6;
+vi adj[MAXN];
 bool visited[MAXN];
 int dist[MAXN];
 
@@ -24,6 +26,14 @@ void bfs(int start) {
     }
 }
 
+void dfs(int u) {
+    visited[u] = true;
+    for (int v : adj[u]) {
+        if (!visited[v])
+            dfs(v);
+    }
+}
+
 int main() {
     int n, m; // number of nodes and edges
     cin >> n >> m;
@@ -38,15 +48,9 @@ int main() {
 
     int start;
     cin >> start;
+
+    memset(visited, 0, sizeof visited);
     bfs(start);
-
-    // output distances
-    for (int i = 1; i <= n; ++i) {
-        if (visited[i])
-            cout << "Distance from " << start << " to " << i << " is " << dist[i] << '\n';
-        else
-            cout << i << " is unreachable from " << start << '\n';
-    }
-
+    dfs(start);
     return 0;
 }
