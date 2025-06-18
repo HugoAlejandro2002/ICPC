@@ -2,15 +2,20 @@
 using namespace std;
 
 int main() {
+    int n = 6;
     vector<int> v = {1, 3, 5, 7, 9, 11};
+    int arr[n] = {1, 3, 5, 7, 9, 11};
+
     // Reverse
+    reverse(arr,arr+n);
     reverse(v.begin(),v.end());
     // Sorting
-    sort(v.begin(), v.end());
-
-    int n = 6;
-    int arr[n] = {1, 3, 5, 7, 9, 11};
     sort(arr,arr+n);
+    sort(v.begin(), v.end());
+    // Fill value
+    int newValue = 124892;
+    fill(arr,arr+n, newValue);
+    fill(v.begin(), v.end(), newValue);
     
     // For lower_bound, upper_bound, binary_search -> container must be sorted
     int val = 6;

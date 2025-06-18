@@ -4,10 +4,13 @@ using namespace std;
 typedef vector<int> vi;
 
 const int MAXN = 1e6;
+int n, m; // number of nodes and edges
+
 vi adj[MAXN];
 bool visited[MAXN];
 int dist[MAXN];
 
+// O(n+m)
 void bfs(int start) {
     queue<int> q;
     visited[start] = true;
@@ -26,6 +29,7 @@ void bfs(int start) {
     }
 }
 
+// O(n+m)
 void dfs(int u) {
     visited[u] = true;
     for (int v : adj[u]) {
@@ -35,7 +39,6 @@ void dfs(int u) {
 }
 
 int main() {
-    int n, m; // number of nodes and edges
     cin >> n >> m;
 
     for (int i = 0; i < m; ++i) {

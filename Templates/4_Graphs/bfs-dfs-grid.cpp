@@ -6,7 +6,8 @@ typedef pair<int, int> ii;
 typedef vector<ii> vii;
 
 const int MAXN = 1005;
-int n, m;
+int n, m; // n rows and m columns
+
 char grid[MAXN][MAXN];       // input grid (e.g. '.' = open, '#' = wall)
 bool visited[MAXN][MAXN];    // visited cells
 int dist[MAXN][MAXN];        // distance from start
@@ -15,6 +16,7 @@ int dist[MAXN][MAXN];        // distance from start
 int dx[] = {-1, 1, 0, 0};
 int dy[] = {0, 0, -1, 1};
 
+// O(n*m)
 void bfs(int sx, int sy) {
     queue<ii> q;
     visited[sy][sx] = true;
@@ -40,6 +42,7 @@ void bfs(int sx, int sy) {
     }
 }
 
+// O(n*m)
 void dfs(int x, int y) {
     if (x < 0 || x >= m || y < 0 || y >= n) return; // out of bounds
     if (visited[y][x] || grid[y][x] == '#') return; // visited or wall
@@ -60,7 +63,7 @@ int main() {
         cin >> grid[i];
 
     memset(visited, 0, sizeof visited);
-    memset(dist, 0, sizeof dist);
+    memset(dist, -1, sizeof dist);
 
     int sx, sy;
     cin >> sx >> sy; // start position (0-indexed)
