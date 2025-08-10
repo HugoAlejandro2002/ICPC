@@ -21,10 +21,10 @@ struct custom_hash
     }
 };
 
-struct Query
+struct Code
 {
     int l, r, idx;
-    bool operator<(const Query &other) const
+    bool operator<(const Code &other) const
     {
         int b1 = l / block_size, b2 = other.l / block_size;
         if (b1 != b2)
@@ -88,7 +88,7 @@ int main()
         }
     }
 
-    vector<Query> queries(q);
+    vector<Code> queries(q);
     for (int i = 0; i < q; ++i)
     {
         cin >> queries[i].l >> queries[i].r;
