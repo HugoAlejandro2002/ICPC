@@ -1,14 +1,7 @@
 name: Generate ICPC Teambook
 
 on:  
-  # Allow manual trigger
   workflow_dispatch:
-    inputs:
-      templates_folder:
-        description: 'Templates folder name'
-        required: false
-        default: 'Templates'
-        type: string
 
 jobs:
   generate-teambook:
@@ -30,7 +23,7 @@ jobs:
         
     - name: Generate teambook
       run: |
-        python teambook_generator.py ${{ github.event.inputs.templates_folder || 'Templates' }} -o ICPC_Teambook.pdf
+        python teambook_generator.py
         
     - name: Get current date
       id: date
@@ -42,3 +35,4 @@ jobs:
         name: icpc-teambook-${{ steps.date.outputs.date }}
         path: ICPC_Teambook.pdf
         retention-days: 30
+        compression-level: 0
