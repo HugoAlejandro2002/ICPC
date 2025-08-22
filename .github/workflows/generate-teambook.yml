@@ -37,10 +37,10 @@ jobs:
         retention-days: 30
 
     - name: Create Release (on main branch push)
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/main'
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: teambook-${{ steps.date.outputs.date }}
+        tag_name: ${{ github.ref }}
         name: "ICPC Teambook - ${{ steps.date.outputs.date }}"
         body: |
           ## ICPC Teambook Generated
