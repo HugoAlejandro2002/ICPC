@@ -40,7 +40,7 @@ jobs:
       if: github.ref == 'refs/heads/main'
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: ${{ github.ref }}
+        tag_name: icpc
         name: "ICPC Teambook - ${{ steps.date.outputs.date }}"
         body: |
           ## ICPC Teambook Generated
