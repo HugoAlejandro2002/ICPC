@@ -1,0 +1,44 @@
+name: Generate ICPC Teambook
+
+on:  
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      templates_folder:
+        description: 'Templates folder name'
+        required: false
+        default: 'Templates'
+        type: string
+
+jobs:
+  generate-teambook:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Generate teambook
+      run: |
+        python teambook_generator.py ${{ github.event.inputs.templates_folder || 'Templates' }} -o ICPC_Teambook.pdf
+        
+    - name: Get current date
+      id: date
+      run: echo "date=$(date +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_OUTPUT
+        
+    - name: Upload teambook as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: icpc-teambook-${{ steps.date.outputs.date }}
+        path: ICPC_Teambook.pdf
+        retention-days: 30

@@ -1,6 +1,10 @@
 /.vscode/
+/.venv/
+/__pycache__/
 
 *.exe
 *.txt
 *.pdf
 *.ignore.*
+
+!requirements.txt
