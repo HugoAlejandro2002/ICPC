@@ -35,4 +35,33 @@ jobs:
         name: icpc-teambook-${{ steps.date.outputs.date }}
         path: ICPC_Teambook.pdf
         retention-days: 30
-        compression-level: 0
+
+    - name: Create Release (on main branch push)
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: teambook-${{ steps.date.outputs.date }}
+        name: "ICPC Teambook - ${{ steps.date.outputs.date }}"
+        body: |
+          ## ICPC Teambook Generated
+          
+          **Generated on:** ${{ steps.date.outputs.date }}
+          **Commit:** ${{ github.sha }}
+          
+          This teambook contains all the algorithm templates from the Templates folder.
+          
+          ### Templates included:
+          - All `.cpp`, `.py`, `.c`, and `.java` files from the Templates directory
+          - Automatically organized by category with proper titles and descriptions
+          
+          ### Usage:
+          1. Download the PDF file below
+          2. Print it out for your ICPC competition
+          3. Use it as a reference during contests
+          
+        files: ICPC_Teambook.pdf
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
